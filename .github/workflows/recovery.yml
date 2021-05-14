@@ -14,11 +14,11 @@ on:
     types: [started]
 
 env:
-  MANIFEST: https://gitlab.com/OrangeFox/Manifest.git
-  MANIFEST_BRANCH: fox_9.0
-  DEVICE: rosy
-  DT_LINK: https://github.com/ElytrA8/recovery_rosy
-  DT_PATH: device/xiaomi/rosy
+  MANIFEST: git://github.com/PitchBlackRecoveryProject/manifest_pb.git
+  MANIFEST_BRANCH: android-6.0
+  DEVICE: PGN528
+  DT_LINK: https://github.com/noob-eng/PGN528.git
+  DT_PATH: device/condor/PGN528
   TARGET: recoveryimage
   TZ: Asia/Kolkata
 
