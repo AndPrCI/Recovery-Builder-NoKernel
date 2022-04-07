@@ -14,11 +14,11 @@ on:
     types: [started]
 
 env:
-  DEVICE: RMX2001
-  DT_LINK: https://github.com/noobyysauraj/pbrp_realme_RMX2001.git -b ofox-a10
-  DT_PATH: device/realme/RMX2001
+  DEVICE: PGN528
+  DT_LINK: https://github.com/noob-eng/PGN528.git -b master
+  DT_PATH: device/condor/PGN528
   TARGET: recoveryimage
-  TZ: Asia/Kolkata
+  TZ: Africa/Algiers
 
 jobs:
   build:
