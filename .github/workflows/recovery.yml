@@ -14,8 +14,10 @@ on:
     types: [started]
 
 env:
+  MANIFEST: https://github.com/noob-eng/PGN528/tree/master
+  MANIFEST_BRANCH: https://github.com/minimal-manifest-twrp/platform_manifest_twrp_omni -b twrp-7.1
   DEVICE: PGN528
-  DT_LINK: https://github.com/noob-eng/PGN528.git -b master
+  DT_LINK: https://github.com/noob-eng/ORANG_pgn528.git
   DT_PATH: device/condor/PGN528
   TARGET: recoveryimage
   TZ: Africa/Algiers
@@ -45,34 +47,30 @@ jobs:
             
        - name: Sync recovery source and device tree
          run: |
-             mkdir ~/OrangeFox_10
-             cd ~/OrangeFox_10
-             git clone https://gitlab.com/OrangeFox/sync.git # or, "git clone git@gitlab.com:OrangeFox/sync.git"
-             cd ~/OrangeFox_10/sync
-             ./get_fox_10.sh ~/OrangeFox_10/fox_10.0
-             cd ~/OrangeFox_10/fox_10.0
+             mkdir ~/PGN528
+             cd ~/PGN528
              git clone $DT_LINK --depth=1 --single-branch $DT_PATH
              
        - name: Build 
          continue-on-error: true
          run: |
-              cd ~/OrangeFox_10/fox_10.0
+              cd ~/PGN528
               . build/envsetup.sh && lunch omni_$DEVICE-eng && export ALLOW_MISSING_DEPENDENCIES=true && export FOX_USE_TWRP_RECOVERY_IMAGE_BUILDER=1 && export LC_ALL="C" && mka $TARGET
               
        - name: Upload Recovery zip 
          continue-on-error: true
          run: |
-             curl https://bashupload.com/ -T ~/OrangeFox_10/fox_10.0/out/target/product/*/*.zip             
+             curl https://bashupload.com/ -T ~/PGN528/out/target/product/*/*.zip             
              
        - uses: actions/upload-artifact@v2
          with:
           name: recoveryzip
-          path: ~/OrangeFox_10/fox_10.0/out/target/product/*/*.zip
+          path: ~/PGN528/out/target/product/*/*.zip
 
        - uses: actions/upload-artifact@v2
          with:
           name: recoveryimage
-          path: ~/OrangeFox_10/fox_10.0/out/target/product/*/*.img
+          path: ~/PGN528/out/target/product/*/*.img
 
              
              
